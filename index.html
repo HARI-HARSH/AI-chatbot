@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Content Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📱 Social Media Content Generator</h1>
+        </header>
+
+        <main>
+            <div class="platform-selector">
+                <label for="platform">Select Platform:</label>
+                <select id="platform">
+                    <option value="general">General</option>
+                    <option value="twitter">Twitter/X</option>
+                    <option value="linkedin">LinkedIn</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="facebook">Facebook</option>
+                </select>
+            </div>
+
+            <div class="topic-input">
+                <label for="topic">Enter your topic or idea:</label>
+                <textarea id="topic" placeholder="What would you like to create content about?"></textarea>
+            </div>
+
+            <button id="generateBtn">Generate Content</button>
+
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Generating content...</p>
+            </div>
+
+            <div id="result" class="hidden">
+                <div class="content-section">
+                    <h2 id="contentTitle"></h2>
+                    <div class="content-box">
+                        <h3>Content</h3>
+                        <p id="contentText"></p>
+                    </div>
+                </div>
+
+                <div class="details-grid">
+                    <div class="detail-box">
+                        <h3>Hashtags</h3>
+                        <p id="hashtags"></p>
+                    </div>
+                    <div class="detail-box">
+                        <h3>Suggested Emojis</h3>
+                        <p id="emojis"></p>
+                    </div>
+                    <div class="detail-box">
+                        <h3>Best Posting Times</h3>
+                        <p id="postingTimes"></p>
+                    </div>
+                    <div class="detail-box">
+                        <h3>Platform Tips</h3>
+                        <p id="platformTips"></p>
+                    </div>
+                </div>
+
+                <div class="copy-options">
+                    <button id="copyContent">Copy Content</button>
+                    <button id="copyHashtags">Copy Hashtags</button>
+                    <button id="copyAll">Copy All</button>
+                </div>
+            </div>
+
+            <div id="error" class="hidden">
+                <p class="error-message"></p>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
