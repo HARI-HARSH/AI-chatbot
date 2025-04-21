@@ -757,4 +757,8 @@ function displayContent(data) {
     addMessage(content, 'bot');
 }''')
 
-    app.run(debug=True, port=5000) 
+    # Get port from environment variable or use default
+    port = int(os.environ.get('PORT', 5000))
+    
+    # Run the app on 0.0.0.0 (all network interfaces)
+    app.run(host='0.0.0.0', port=port) 
