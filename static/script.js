@@ -153,9 +153,9 @@ function addMessage(content, sender) {
     contentDiv.className = 'message-content';
     
     if (typeof content === 'string') {
-        contentDiv.innerHTML = content;
+        contentDiv.innerHTML = `<p>${content}</p>`;
     } else {
-        contentDiv.innerHTML = content;
+        contentDiv.appendChild(content);
     }
     
     messageDiv.appendChild(contentDiv);
@@ -164,19 +164,37 @@ function addMessage(content, sender) {
 }
 
 function displayContent(data) {
-    // Create the content message
-    let content = `
-        <div class="markdown-body">
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message bot';
+    
+    let content = '<div class="message-content">';
+    
+    if (!data.is_content_related) {
+        // For non-content-related queries, only show the basic message
+        content += `
             <h2>${data.title}</h2>
-            ${data.content}
+            <p>${data.content}</p>
+        `;
+    } else {
+        // For content-related queries, show all details
+        content += `
+            <h2>${data.title}</h2>
+            <p>${data.content}</p>
             <div class="content-details">
                 <p><strong>Hashtags:</strong> ${data.hashtags.join(' ')}</p>
                 <p><strong>Suggested Emojis:</strong> ${data.emoji_suggestions}</p>
                 <p><strong>Best Posting Times:</strong> ${data.best_posting_times}</p>
                 <p><strong>Platform Tips:</strong> ${data.platform_specific_tips}</p>
             </div>
-        </div>
-    `;
+        `;
+    }
     
-    addMessage(content, 'bot');
+    content += '</div>';
+    messageDiv.innerHTML = content;
+    
+    // Add message to chat
+    chatMessages.appendChild(messageDiv);
+    
+    // Scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 }

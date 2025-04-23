@@ -71,14 +71,27 @@ async function generateContent() {
 }
 
 function displayContent(data) {
-    contentTitle.textContent = data.title;
-    contentText.textContent = data.content;
-    hashtags.textContent = data.hashtags.join(' ');
-    emojis.textContent = data.emoji_suggestions;
-    postingTimes.textContent = data.best_posting_times;
-    platformTips.textContent = data.platform_specific_tips;
+    // Check if the response is the restricted message
+    if (data === "I am a content recommender that only gives recommendations for content creation.") {
+        addMessage(data, 'bot');
+        return;
+    }
 
-    resultDiv.classList.remove('hidden');
+    // Create the content message
+    let content = `
+        <div class="markdown-body">
+            <h2>${data.title}</h2>
+            ${data.content}
+            <div class="content-details">
+                <p><strong>Hashtags:</strong> ${data.hashtags.join(', ')}</p>
+                <p><strong>Suggested Emojis:</strong> ${data.emoji_suggestions}</p>
+                <p><strong>Best Posting Times:</strong> ${data.best_posting_times}</p>
+                <p><strong>Platform Tips:</strong> ${data.platform_specific_tips}</p>
+            </div>
+        </div>
+    `;
+    
+    addMessage(content, 'bot');
 }
 
 function showError(message) {
